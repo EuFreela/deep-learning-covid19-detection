@@ -1,5 +1,13 @@
 # Deep Learning para Detecção de COVID-19 em Radiografias Torácicas
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23504469.svg)](https://doi.org/10.5281/zenodo.23504469)
+
+**Author:** Lameck Silva Fernandes  
+**Affiliation:** Independent Researcher  
+**Location:** Passos, MG, Brazil  
+
+---
+
 Projeto de aprendizado profundo (*deep learning*) que investiga o uso de **MobileNetV2 com *transfer learning*** para classificar radiografias torácicas em três categorias: COVID-19, Normal e Pneumonia.
 
 Este repositório acompanha o artigo científico *Deep Learning Applied to COVID-19 Detection in Chest X-Rays: A Transfer Learning Approach*, de **Lameck Silva Fernandes**. O repositório reúne o notebook de treinamento, os resultados experimentais, o modelo salvo e materiais complementares relacionados à pesquisa.
