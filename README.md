@@ -12,7 +12,11 @@ Projeto de aprendizado profundo (*deep learning*) que investiga o uso de **Mobil
 
 Este repositório acompanha o artigo científico *Deep Learning Applied to COVID-19 Detection in Chest X-Rays: A Transfer Learning Approach*, de **Lameck Silva Fernandes**. O repositório reúne o notebook de treinamento, os resultados experimentais, o modelo salvo e materiais complementares relacionados à pesquisa.
 
-> **Aviso:** este projeto é experimental e destinado à pesquisa e ao uso educacional. O modelo não é um sistema de diagnóstico clinicamente validado e não deve ser utilizado para tomar decisões médicas.
+> **Aviso e perspectivas futuras:** Este projeto encontra-se em fase de MVP (*Minimum Viable Product*), com resultados experimentais obtidos a partir de uma base pública de radiografias torácicas. O modelo ainda não foi validado clinicamente e não deve ser utilizado para diagnóstico ou tomada de decisões médicas.
+>
+> As próximas etapas previstas incluem validação externa com conjuntos de dados independentes e, futuramente, estudos de validação em ambiente hospitalar, conduzidos em colaboração com instituições de saúde e pesquisadores qualificados. Essas etapas poderão exigir financiamento para pesquisa, aprovação ética aplicável, definição de protocolos de estudo e cumprimento dos requisitos de proteção de dados e privacidade dos participantes.
+>
+> O objetivo de longo prazo é investigar a viabilidade da abordagem em contextos clínicos reais, sem presumir antecipadamente sua eficácia ou aplicabilidade médica.
 
 ## Visão geral
 
