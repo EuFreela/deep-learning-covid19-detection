@@ -1,0 +1,7 @@
+cff-version: 1.2.0
+message: "Se você utilizar este projeto em sua pesquisa, cite-o da seguinte forma."
+title: "Deep Learning Applied to COVID-19 Detection in Chest X-Rays: A Transfer Learning Approach"
+authors:
+  - family-names: Fernandes
+    given-names: "Lameck Silva"
+type: software
