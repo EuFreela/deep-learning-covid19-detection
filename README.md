@@ -170,10 +170,12 @@ Os caminhos e a organização exata dos arquivos devem ser conferidos no noteboo
 
 O notebook e os materiais complementares permitem inspecionar o fluxo experimental. A reprodução dos resultados pode depender das versões das bibliotecas, do ambiente de execução, da organização dos dados e das configurações de treinamento.
 
-## Artigo científico
+## 📄 Artigo científico
 
 **Título:** *Deep Learning Applied to COVID-19 Detection in Chest X-Rays: A Transfer Learning Approach*  
 **Autor:** Lameck Silva Fernandes
+
+**DOI:** [10.5281/zenodo.23504469](https://doi.org/10.5281/zenodo.23504469)
 
 ## Disponibilidade dos dados
 
