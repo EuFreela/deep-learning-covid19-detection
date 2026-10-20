@@ -170,7 +170,7 @@ Os caminhos e a organização exata dos arquivos devem ser conferidos no noteboo
 
 O notebook e os materiais complementares permitem inspecionar o fluxo experimental. A reprodução dos resultados pode depender das versões das bibliotecas, do ambiente de execução, da organização dos dados e das configurações de treinamento.
 
-## 📄 Artigo científico
+## Artigo científico
 
 **Título:** *Deep Learning Applied to COVID-19 Detection in Chest X-Rays: A Transfer Learning Approach*  
 **Autor:** Lameck Silva Fernandes
@@ -181,11 +181,11 @@ O notebook e os materiais complementares permitem inspecionar o fluxo experiment
 
 A base utilizada está disponível no [Chest X-Ray Dataset do Kaggle](https://www.kaggle.com/datasets/woleolajide86/chest-xray-dataset). A reutilização e a redistribuição das imagens devem respeitar os termos de uso e a licença aplicável à base.
 
-## 🚀 Execução do Notebook no Kaggle
+## Execução do Notebook no Kaggle
 
 Para reproduzir o treinamento do modelo, utilize o notebook disponível no diretório [`notebooks/`](notebooks/) deste repositório. A execução é recomendada no ambiente Kaggle Notebooks, que oferece acesso a recursos de GPU.
 
-### ⚙️ Configuração do ambiente
+### Configuração do ambiente
 
 Antes de executar as células do notebook, configure o ambiente conforme indicado abaixo:
 
