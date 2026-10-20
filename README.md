@@ -137,8 +137,6 @@ deep-learning-covid19-detection/
 └── LICENSE
 ```
 
-Se o PDF do artigo for incluído no repositório, a estrutura poderá conter também `article/article.pdf`.
-
 ## Como executar
 
 ### Requisitos
