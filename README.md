@@ -149,8 +149,6 @@ Instale as dependências a partir da raiz do repositório:
 pip install -r requirements.txt
 ```
 
-Confira se `requirements.txt` contém as dependências e versões compatíveis com o notebook e com o arquivo de modelo salvo.
-
 ### Preparar os dados
 
 1. Obtenha a base de dados na [página do conjunto no Kaggle](https://www.kaggle.com/datasets/woleolajide86/chest-xray-dataset).
