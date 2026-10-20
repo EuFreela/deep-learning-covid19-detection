@@ -183,6 +183,28 @@ O notebook e os materiais complementares permitem inspecionar o fluxo experiment
 
 A base utilizada está disponível no [Chest X-Ray Dataset do Kaggle](https://www.kaggle.com/datasets/woleolajide86/chest-xray-dataset). A reutilização e a redistribuição das imagens devem respeitar os termos de uso e a licença aplicável à base.
 
+## 🚀 Execução do Notebook no Kaggle
+
+Para reproduzir o treinamento do modelo, utilize o notebook disponível no diretório [`notebooks/`](notebooks/) deste repositório. A execução é recomendada no ambiente Kaggle Notebooks, que oferece acesso a recursos de GPU.
+
+### ⚙️ Configuração do ambiente
+
+Antes de executar as células do notebook, configure o ambiente conforme indicado abaixo:
+
+1. **Habilitar acesso à internet:** no painel de configurações do notebook, ative a opção **`Turn on internet`**. Isso permite baixar dependências e acessar recursos externos necessários ao treinamento.
+2. **Selecionar a GPU:** em *Settings → Accelerator*, selecione **`GPU T4 x2`**, caso essa opção esteja disponível na sua conta e sessão do Kaggle.
+3. **Verificar as dependências:** confirme se as bibliotecas necessárias estão instaladas conforme o arquivo [`requirements.txt`](requirements.txt).
+4. **Executar as células:** execute o notebook sequencialmente, verificando a disponibilidade dos dados, o carregamento do MobileNetV2 e a conclusão das etapas de treinamento e avaliação.
+
+### Observações importantes
+
+- A disponibilidade de GPU e da opção `GPU T4 x2` depende das cotas, das configurações e da disponibilidade de recursos do Kaggle.
+- A opção `GPU T4 x2` disponibiliza duas GPUs T4, mas o código não necessariamente utilizará ambas automaticamente. O aproveitamento das duas GPUs depende da implementação do treinamento.
+- A ativação da internet pode ser necessária para baixar bibliotecas ou pesos pré-treinados, mas o acesso à base de dados também deve estar configurado corretamente.
+- O tempo de execução varia conforme a disponibilidade dos recursos, o volume de dados e a configuração do treinamento.
+
+**Reprodutibilidade:** recomenda-se registrar as configurações utilizadas, as versões das bibliotecas e os resultados obtidos em cada execução para facilitar a reprodução dos experimentos.
+
 ## Citação
 
 Caso utilize este repositório em trabalhos acadêmicos, cite o artigo associado e consulte o arquivo `CITATION.cff` para os metadados de citação do projeto. Acrescente DOI, URL da publicação e dados bibliográficos definitivos quando estiverem disponíveis.
