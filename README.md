@@ -8,6 +8,8 @@
 
 ---
 
+<img src="https://i.postimg.cc/bNZVVChY/ilustration.jpg" width="200" alt="Ilustração do projeto">
+
 Projeto de aprendizado profundo (*deep learning*) que investiga o uso de **MobileNetV2 com *transfer learning*** para classificar radiografias torácicas em três categorias: COVID-19, Normal e Pneumonia.
 
 Este repositório acompanha o artigo científico *Deep Learning Applied to COVID-19 Detection in Chest X-Rays: A Transfer Learning Approach*, de **Lameck Silva Fernandes**. O repositório reúne o notebook de treinamento, os resultados experimentais, o modelo salvo e materiais complementares relacionados à pesquisa.
