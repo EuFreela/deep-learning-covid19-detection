@@ -1,6 +1,6 @@
-# CoffeeLeaf AI — Identificação de Condições Foliares do Cafeeiro
+# Deep Learning para Detecção de COVID-19 em Radiografias Torácicas
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23480207.svg)](https://doi.org/10.5281/zenodo.23480207)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23504469.svg)](https://doi.org/10.5281/zenodo.23504469)
 
 **Author:** Lameck Silva Fernandes  
 **Affiliation:** Independent Researcher  
@@ -8,179 +8,205 @@
 
 ---
 
-Aplicação Web Progressiva (*Progressive Web App — PWA*) que integra um modelo de classificação de imagens para identificar cinco categorias de condições foliares do cafeeiro: **Healthy, Miner, Rust, Phoma e Cercospora**.
+Projeto de aprendizado profundo (*deep learning*) que investiga o uso de **MobileNetV2 com *transfer learning*** para classificar radiografias torácicas em três categorias: COVID-19, Normal e Pneumonia.
 
-Este repositório acompanha o artigo científico *Development of a Progressive Web Application for Coffee Leaf Condition Identification Using Artificial Intelligence*. O projeto reúne o código da aplicação e materiais associados à organização dos dados e ao treinamento do modelo.
+Este repositório acompanha o artigo científico *Deep Learning Applied to COVID-19 Detection in Chest X-Rays: A Transfer Learning Approach*, de **Lameck Silva Fernandes**. O repositório reúne o notebook de treinamento, os resultados experimentais, o modelo salvo e materiais complementares relacionados à pesquisa.
 
-> **Aviso e perspectivas futuras:** Este projeto encontra-se em fase de protótipo experimental, com uma demonstração funcional baseada em um subconjunto público de imagens de folhas de cafeeiro. O modelo ainda não foi avaliado quantitativamente em um conjunto de teste independente e não deve ser considerado uma ferramenta validada para diagnóstico fitossanitário.
+> **Aviso e perspectivas futuras:** Este projeto encontra-se em fase de MVP (*Minimum Viable Product*), com resultados experimentais obtidos a partir de uma base pública de radiografias torácicas. O modelo ainda não foi validado clinicamente e não deve ser utilizado para diagnóstico ou tomada de decisões médicas.
 >
-> As próximas etapas incluem avaliação com imagens rotuladas não utilizadas no treinamento e validação externa com dados de diferentes origens. Estudos futuros poderão exigir colaboração com especialistas em fitossanidade, protocolos de coleta e avaliação, e recursos para pesquisa.
+> As próximas etapas previstas incluem validação externa com conjuntos de dados independentes e, futuramente, estudos de validação em ambiente hospitalar, conduzidos em colaboração com instituições de saúde e pesquisadores qualificados. Essas etapas poderão exigir financiamento para pesquisa, aprovação ética aplicável, definição de protocolos de estudo e cumprimento dos requisitos de proteção de dados e privacidade dos participantes.
 >
-> O objetivo de longo prazo é investigar a viabilidade da abordagem em condições reais de campo, sem presumir antecipadamente sua precisão ou aplicabilidade operacional.
+> O objetivo de longo prazo é investigar a viabilidade da abordagem em contextos clínicos reais, sem presumir antecipadamente sua eficácia ou aplicabilidade médica.
 
 ## Visão geral
 
-O CoffeeLeaf AI utiliza um modelo de classificação de imagens para apresentar uma classe prevista e uma pontuação de confiança para imagens de folhas de cafeeiro. As cinco classes correspondem aos rótulos presentes no conjunto de dados:
+O projeto investiga a capacidade de um modelo baseado em MobileNetV2, pré-treinado no ImageNet, de reconhecer padrões visuais em radiografias torácicas e distinguir três classes:
 
-- **Healthy:** folha saudável.
-- **Miner:** folha identificada como afetada por minador.
-- **Rust:** ferrugem do cafeeiro.
-- **Phoma:** classe Phoma do conjunto de dados.
-- **Cercospora:** classe Cercospora do conjunto de dados.
+- **COVID-19:** imagens rotuladas como COVID-19 na base de dados, utilizadas para estudar padrões radiográficos associados à doença.
+- **Normal:** imagens incluídas na categoria *Normal* da base de dados, sem alterações radiográficas identificadas nessa classificação.
+- **Pneumonia:** imagens rotuladas como pneumonia na base de dados.
 
-Os nomes das classes refletem os rótulos do conjunto utilizado. A previsão automatizada não confirma, por si só, a condição fitossanitária real da planta.
+As categorias representam os rótulos da base utilizada. A classificação do modelo não confirma, por si só, o estado clínico de uma pessoa.
 
-## Demonstração funcional
+O fluxo experimental inclui pré-processamento, aumento de dados (*data augmentation*), treinamento em duas etapas e avaliação por métricas de classificação.
 
-Em uma demonstração com uma única imagem, a aplicação exibiu a classe **Healthy** com uma pontuação de confiança de **100,0**. Essa observação demonstra o funcionamento da interface de predição para uma imagem específica, mas não estabelece a acurácia geral do modelo.
+## Resultados experimentais
 
-Não foram reportadas métricas quantitativas obtidas em um conjunto de teste independente, documentado e separado dos dados de treinamento. Por isso, este projeto não apresenta valores gerais de acurácia, precisão, sensibilidade (*recall*) ou F1-score.
+A avaliação reportada foi realizada em um conjunto de teste com 965 imagens.
+
+| Métrica | Resultado |
+|---|---:|
+| Acurácia | 94,72% |
+| Precisão macro | 94,07% |
+| Sensibilidade macro | 95,11% |
+| F1-score macro | 94,54% |
+| F1-score ponderado | 94,77% |
+
+### Desempenho na classe COVID-19
+
+| Métrica | Resultado |
+|---|---:|
+| Precisão | 97,67% |
+| Sensibilidade (*recall*) | 96,55% |
+| F1-score | 97,11% |
+
+Esses valores descrevem o desempenho no conjunto avaliado. Não garantem desempenho equivalente em outras bases, hospitais, populações ou condições de aquisição de imagens.
 
 ## Base de dados
 
-O projeto utiliza um subconjunto do conjunto público JMuBEN/JMuBEN2, composto por imagens de folhas de cafeeiro Arábica. A publicação associada reporta **58.555 imagens** distribuídas entre cinco classes.
-
-Para o treinamento do CoffeeLeaf AI, foram selecionadas **5.000 imagens**, sendo 1.000 por classe. Em cada classe, foram selecionadas as primeiras 1.000 imagens na ordem existente no conjunto de dados; não foi utilizado um procedimento de amostragem aleatória.
-
-### Distribuição reportada no conjunto original
+O experimento utilizou o [Chest X-Ray Dataset no Kaggle](https://www.kaggle.com/datasets/woleolajide86/chest-xray-dataset), disponibilizado por Woleolajide86.
 
 | Classe | Quantidade de imagens |
 |---|---:|
-| Healthy | 18.985 |
-| Miner | 16.979 |
-| Rust | 8.337 |
-| Phoma | 6.572 |
-| Cercospora | 7.682 |
-| **Total** | **58.555** |
+| COVID-19 | 576 |
+| Normal | 1.583 |
+| Pneumonia | 4.273 |
+| **Total** | **6.432** |
 
-### Amostra utilizada no projeto
+A base apresenta desequilíbrio entre as classes, com predominância de imagens de pneumonia.
 
-| Classe | Quantidade de imagens |
-|---|---:|
-| Healthy | 1.000 |
-| Miner | 1.000 |
-| Rust | 1.000 |
-| Phoma | 1.000 |
-| Cercospora | 1.000 |
-| **Total** | **5.000** |
-
-O conjunto original foi coletado em uma fazenda em Mutira, no condado de Kirinyaga, Quênia. A generalização para outras regiões, cultivares, condições climáticas ou dispositivos de captura não foi estabelecida.
-
-As imagens originais não são redistribuídas automaticamente por este repositório. O acesso e eventual reutilização devem respeitar os termos e a licença do conjunto de dados original.
+As imagens originais não são incluídas neste repositório. O acesso, uso e eventual redistribuição estão sujeitos aos termos definidos pelo responsável pela base de dados.
 
 ## Metodologia
 
-### Seleção e preparação dos dados
+### Pré-processamento
 
-- Seleção de 1.000 imagens por classe, totalizando 5.000 imagens.
-- Seleção das primeiras 1.000 imagens de cada classe na ordem existente no conjunto original.
-- Renomeação e organização das imagens em grupos por classe.
-- Envio das imagens ao Google Teachable Machine para treinamento.
-- Não foi realizado pré-processamento manual adicional antes do envio. Redimensionamento, normalização e outras transformações internas da plataforma não foram configuradas ou verificadas de forma independente.
+- Redimensionamento das imagens para 224 × 224 pixels.
+- Normalização dos pixels por divisão por 255.
+- Aplicação de aumento de dados somente às imagens de treinamento.
+- Transformações descritas no experimento: rotação, deslocamentos horizontal e vertical, zoom e espelhamento horizontal.
 
 ### Arquitetura
 
-O modelo foi treinado no Google Teachable Machine, que utiliza uma rede neural convolucional (*Convolutional Neural Network — CNN*) com arquitetura MobileNet como base (*backbone*) e aprendizagem por transferência (*transfer learning*). Os detalhes internos do modelo exportado não foram verificados de forma independente.
+A arquitetura utilizada foi MobileNetV2, pré-treinada no ImageNet, como base convolucional. A cabeça de classificação foi composta por:
+
+1. Global Average Pooling.
+2. Camada densa com 256 unidades e ativação ReLU.
+3. Dropout com taxa de 0,5.
+4. Camada de saída com três unidades e ativação Softmax.
 
 ### Estratégia de treinamento
 
-O treinamento foi realizado em uma sessão pela interface do Google Teachable Machine.
+O treinamento foi realizado em duas etapas:
 
-Configurações informadas na plataforma:
+1. **Extração de características:** a base convolucional pré-treinada foi congelada enquanto a camada de classificação era treinada.
+2. **Ajuste fino (*fine-tuning*):** as 30 camadas finais foram selecionadas para treinamento, mantendo congeladas as camadas BatchNormalization.
 
-| Parâmetro | Configuração |
-|---|---|
-| Plataforma | Google Teachable Machine |
-| Épocas | 50 |
-| Tamanho do lote (*batch size*) | 16 |
-| Taxa de aprendizado | 0,001 |
-| Número de classes | 5 |
-| Imagens selecionadas | 5.000 |
+Configurações reportadas:
 
-A divisão automática dos dados da plataforma foi utilizada, mas as proporções exatas e os papéis dos subconjuntos resultantes não foram verificados independentemente.
+- Otimizador: Adam.
+- Taxa de aprendizado inicial: `1e-3`.
+- Taxa de aprendizado no ajuste fino: `1e-5`.
+- Tamanho do lote (*batch size*): 16.
+- Até 10 épocas por etapa.
+- Monitoramento da perda de validação e salvamento do melhor modelo.
 
-### Avaliação
+### Divisão dos dados
 
-Após o treinamento, previsões foram inspecionadas na aplicação CoffeeLeaf AI. Não foi realizada avaliação quantitativa em um conjunto de teste independente e documentado. Portanto, o desempenho geral e a capacidade de generalização do modelo permanecem não estabelecidos.
+| Conjunto | Quantidade de imagens |
+|---|---:|
+| Treinamento | 4.502 |
+| Validação | 965 |
+| Teste | 965 |
+| **Total** | **6.432** |
 
-## Aplicação Web Progressiva
+A avaliação incluiu acurácia, precisão, sensibilidade (*recall*), F1-score e matriz de confusão.
 
-O CoffeeLeaf AI integra o modelo treinado a uma aplicação acessível pelo navegador. O fluxo documentado consiste em enviar uma imagem, processá-la com o modelo integrado e exibir a classe prevista com a pontuação de confiança associada.
+## Modelo treinado
 
-A demonstração apresenta a integração funcional entre o classificador e a interface PWA; não constitui validação da confiabilidade do modelo em condições reais de campo.
+O repositório inclui o arquivo `melhor_modelo_fase2.keras`, associado à segunda etapa do treinamento (*fine-tuning*).
 
-## Arquitetura do sistema
+O arquivo pode ser utilizado em experimentos de inferência e avaliação, desde que o ambiente de software, a arquitetura e o pré-processamento sejam compatíveis com os utilizados no treinamento. Consulte o notebook para verificar o fluxo de carregamento e uso do modelo.
 
-O fluxo geral do projeto compreende duas etapas:
+A presença do arquivo não implica validação clínica nem garante generalização para dados externos.
 
-1. **Desenvolvimento do modelo:** seleção e organização de 5.000 imagens em cinco classes, seguida de treinamento no Google Teachable Machine.
-2. **Uso da aplicação:** envio de uma imagem à PWA, inferência pelo modelo integrado e exibição da classe prevista e da pontuação de confiança.
+## Estrutura do repositório
 
-Os detalhes internos da arquitetura exportada e do pré-processamento não foram verificados de forma independente; por isso, não são especificados além das informações documentadas neste projeto.
+A estrutura abaixo corresponde aos arquivos principais apresentados no projeto. Atualize-a se adicionar ou remover arquivos.
 
-## Resultados e discussão
+```text
+deep-learning-covid19-detection/
+├── README.md
+├── notebooks/
+│   └── mobilenetv2_training.ipynb
+├── figures/
+│   └── training_curves.png
+├── melhor_modelo_fase2.keras
+├── requirements.txt
+├── CITATION.cff
+└── LICENSE
+```
 
-A demonstração funcional mostrou a aplicação exibindo a classe **Healthy** com uma pontuação de confiança de **100,0** para uma única imagem. Esse exemplo ilustra a interface de predição, mas não permite concluir que o modelo tenha 100% de acurácia.
+## Como executar
 
-Como não foram reportadas métricas de um conjunto de teste independente e documentado, não é possível quantificar, com as informações disponíveis, a precisão global, a sensibilidade por classe ou a capacidade de generalização do modelo. Uma avaliação futura deverá utilizar imagens rotuladas que não tenham sido usadas no treinamento e reportar métricas apropriadas.
+### Requisitos
+
+O notebook utiliza bibliotecas Python para aprendizado de máquina, processamento de dados e visualização, incluindo TensorFlow/Keras, NumPy, Matplotlib e scikit-learn.
+
+Instale as dependências a partir da raiz do repositório:
+
+```bash
+pip install -r requirements.txt
+```
+
+### Preparar os dados
+
+1. Obtenha a base de dados na [página do conjunto no Kaggle](https://www.kaggle.com/datasets/woleolajide86/chest-xray-dataset).
+2. Organize as imagens conforme a estrutura de diretórios esperada pelo notebook.
+3. Ajuste os caminhos de arquivos e diretórios no notebook para seu ambiente.
+4. Execute as células na ordem apresentada.
+
+Os caminhos e a organização exata dos arquivos devem ser conferidos no notebook antes da execução.
 
 ## Limitações
 
-- A demonstração de uma única previsão não estabelece a acurácia geral do modelo.
-- Não foram reportadas métricas quantitativas de um conjunto de teste independente e documentado.
-- As proporções e os papéis da divisão automática de dados do Teachable Machine não foram verificados de forma independente.
-- A seleção das primeiras 1.000 imagens de cada classe não foi aleatória e pode limitar a representatividade da amostra.
-- O conjunto de dados tem uma origem geográfica específica; a generalização para outras regiões e condições não foi estabelecida.
-- O modelo não foi validado em campo por meio de um estudo externo documentado.
-- A pontuação de confiança exibida pela interface não deve ser interpretada automaticamente como probabilidade calibrada de acerto.
-
-## Perspectivas futuras
-
-As próximas etapas incluem avaliar o modelo com imagens rotuladas que não tenham sido utilizadas no treinamento, documentar a divisão entre treinamento, validação e teste, reportar métricas por classe e realizar validação externa com imagens de diferentes origens. A confiabilidade em condições reais de campo deverá ser investigada antes de qualquer afirmação de aplicabilidade operacional.
-
-## Artigo científico
-
-**Título:** *Development of a Progressive Web Application for Coffee Leaf Condition Identification Using Artificial Intelligence*  
-**Autor:** Lameck Silva Fernandes
-
-**DOI:** [10.5281/zenodo.23480207](https://doi.org/10.5281/zenodo.23480207)
-
-## Disponibilidade dos dados
-
-O conjunto original JMuBEN/JMuBEN2 está disponível no [Mendeley Data](https://data.mendeley.com/datasets/t2r6rszp5c/1). O projeto utiliza um subconjunto de 5.000 imagens, selecionadas e reorganizadas a partir do conjunto original. O uso e a redistribuição das imagens devem respeitar os termos de licença do conjunto original.
-
-O conjunto BRACOT, citado no artigo como recurso relacionado à segmentação de folhas de cafeeiro, pode ser consultado em [Mendeley Data — BRACOT](https://data.mendeley.com/datasets/pmkbyjpf6k/1). Ele foi desenvolvido para segmentação de instâncias e não foi utilizado como conjunto principal para a classificação de condições foliares neste projeto.
-
-## Disponibilidade do código
-
-O código-fonte da aplicação está disponível em [GitHub — CoffeeLeaf AI](https://github.com/EuFreela/coffeeleaf-ai). Consulte o repositório para verificar os arquivos, as instruções de execução e os materiais efetivamente disponibilizados.
-
-## Como acessar
-
-- **Código-fonte:** [GitHub — CoffeeLeaf AI](https://github.com/EuFreela/coffeeleaf-ai)
-- **Artigo e registro DOI:** [Zenodo — 10.5281/zenodo.23480207](https://doi.org/10.5281/zenodo.23480207)
-- **Conjunto de dados JMuBEN/JMuBEN2:** [Mendeley Data](https://data.mendeley.com/datasets/t2r6rszp5c/1)
-- **Conjunto BRACOT:** [Mendeley Data](https://data.mendeley.com/datasets/pmkbyjpf6k/1)
+- A base de dados apresenta desequilíbrio entre as classes.
+- O conjunto de teste provém da mesma base utilizada no experimento.
+- A generalização para conjuntos de dados independentes não foi estabelecida.
+- Os resultados não demonstram segurança clínica nem eficácia diagnóstica.
+- O modelo destina-se à pesquisa e ao uso educacional e não substitui a avaliação de profissionais de saúde.
 
 ## Reprodutibilidade
 
-A reprodução dos experimentos pode depender da disponibilidade da base original, da seleção exata das imagens, da versão da plataforma de treinamento e dos arquivos de modelo exportados. Como as proporções da divisão automática e algumas transformações internas da plataforma não foram verificadas, a reprodução integral do treinamento não está totalmente documentada.
+O notebook e os materiais complementares permitem inspecionar o fluxo experimental. A reprodução dos resultados pode depender das versões das bibliotecas, do ambiente de execução, da organização dos dados e das configurações de treinamento.
 
-## Financiamento
+## Artigo científico
 
-Esta pesquisa não recebeu financiamento externo.
+**Título:** *Deep Learning Applied to COVID-19 Detection in Chest X-Rays: A Transfer Learning Approach*  
+**Autor:** Lameck Silva Fernandes
 
-## Conflitos de interesse
+**DOI:** [10.5281/zenodo.23504469](https://doi.org/10.5281/zenodo.23504469)
 
-O autor declara não haver conflitos de interesse.
+## Disponibilidade dos dados
 
-## Declaração de uso de inteligência artificial
+A base utilizada está disponível no [Chest X-Ray Dataset do Kaggle](https://www.kaggle.com/datasets/woleolajide86/chest-xray-dataset). A reutilização e a redistribuição das imagens devem respeitar os termos de uso e a licença aplicável à base.
 
-Durante a preparação do manuscrito, o autor utilizou o ChatGPT (OpenAI) para auxiliar na redação e estruturação do texto, no aprimoramento do inglês e na orientação técnica para escrever o código e treinar e implementar o modelo. O autor revisou e editou o conteúdo e o código gerados e assume responsabilidade pelo conteúdo final.
+## Execução do Notebook no Kaggle
 
-## Referências
+Para reproduzir o treinamento do modelo, utilize o notebook disponível no diretório [`notebooks/`](notebooks/) deste repositório. A execução é recomendada no ambiente Kaggle Notebooks, que oferece acesso a recursos de GPU.
 
-1. Fernandes, Lameck Silva. *CoffeeLeaf AI: Image classification application and training data*. GitHub, 2026. [Repositório do projeto](https://github.com/EuFreela/coffeeleaf-ai).
-2. Jepkoech, J.; Mugo, D. M.; Kenduiywo, B. K.; Too, E. C. *Arabica coffee leaf images dataset for coffee leaf disease detection and classification*. Data in Brief, 36, 107142, 2021. [https://doi.org/10.1016/j.dib.2021.107142](https://doi.org/10.1016/j.dib.2021.107142).
-3. JMuBEN/JMuBEN2 dataset. *Arabica coffee leaf disease classification dataset: Jmuben/jmuben2*. Mendeley Data, 2021. [Dataset](https://data.mendeley.com/datasets/t2r6rszp5c/1).
-4. Krohling, R.; Tozzi de Souza, J. E.; Tassis, L. M. *BRACOT — a Brazilian Arabica coffee tree images dataset for instance segmentation of coffee leaves*. Mendeley Data, 2021. [Dataset](https://data.mendeley.com/datasets/pmkbyjpf6k/1).
+### Configuração do ambiente
+
+Antes de executar as células do notebook, configure o ambiente conforme indicado abaixo:
+
+1. **Habilitar acesso à internet:** no painel de configurações do notebook, ative a opção **`Turn on internet`**. Isso permite baixar dependências e acessar recursos externos necessários ao treinamento.
+2. **Selecionar a GPU:** em *Settings → Accelerator*, selecione **`GPU T4 x2`**, caso essa opção esteja disponível na sua conta e sessão do Kaggle.
+3. **Verificar as dependências:** confirme se as bibliotecas necessárias estão instaladas conforme o arquivo [`requirements.txt`](requirements.txt).
+4. **Executar as células:** execute o notebook sequencialmente, verificando a disponibilidade dos dados, o carregamento do MobileNetV2 e a conclusão das etapas de treinamento e avaliação.
+
+### Observações importantes
+
+- A disponibilidade de GPU e da opção `GPU T4 x2` depende das cotas, das configurações e da disponibilidade de recursos do Kaggle.
+- A opção `GPU T4 x2` disponibiliza duas GPUs T4, mas o código não necessariamente utilizará ambas automaticamente. O aproveitamento das duas GPUs depende da implementação do treinamento.
+- A ativação da internet pode ser necessária para baixar bibliotecas ou pesos pré-treinados, mas o acesso à base de dados também deve estar configurado corretamente.
+- O tempo de execução varia conforme a disponibilidade dos recursos, o volume de dados e a configuração do treinamento.
+
+**Reprodutibilidade:** recomenda-se registrar as configurações utilizadas, as versões das bibliotecas e os resultados obtidos em cada execução para facilitar a reprodução dos experimentos.
+
+## Citação
+
+Caso utilize este repositório em trabalhos acadêmicos, cite o artigo associado e consulte o arquivo `CITATION.cff` para os metadados de citação do projeto. Acrescente DOI, URL da publicação e dados bibliográficos definitivos quando estiverem disponíveis.
+
+## Licença
+
+Consulte o arquivo `LICENSE` para conhecer os termos de reutilização do código. A licença do código não se estende automaticamente ao conjunto de dados, ao artigo ou a materiais de terceiros.
